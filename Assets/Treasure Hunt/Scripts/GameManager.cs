@@ -3,55 +3,60 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-namespace CircuitStream { 
-    public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
+{
+    //super basic singleton
+    public static GameManager Instance;
+
+    private void Awake()
     {
-        //super basic singleton
-        public static GameManager Instance;
+        Instance = this;
+    }
+    //----------------------
 
-        private void Awake()
+    [SerializeField] private TMP_Text scoreText;
+
+    // workshop - import audio source and audio clip
+
+    // workshop - import game win and game lost text
+
+    int totalTreasures;
+    int collectedTreasures;
+
+    void Start()
+    {
+        totalTreasures = GameObject.FindGameObjectsWithTag("treasure").Length;
+        collectedTreasures = 0;
+        scoreText.text = collectedTreasures + "/" + totalTreasures;
+    }
+
+    public void CollectTreasure()
+    {
+        //workshop - play audio
+        
+
+        collectedTreasures++;
+
+        if(collectedTreasures>=totalTreasures)
         {
-            Instance = this;
-        }
-        //----------------------
-
-        [SerializeField] private TMP_Text scoreText;
-        [SerializeField] private AudioSource sfxAudio;
-        [SerializeField] private AudioClip pickupAudioClip;
-
-        int totalTreasures;
-        int collectedTreasures;
-
-        void Start()
-        {
-            totalTreasures = GameObject.FindGameObjectsWithTag("treasure").Length;
-            collectedTreasures = 0;
-            scoreText.text = collectedTreasures + "/" + totalTreasures;
-        }
-
-        public void CollectTreasure()
-        {
-            //play audio
-            sfxAudio.PlayOneShot(pickupAudioClip);
-
-            collectedTreasures++;
-
-            if(collectedTreasures>=totalTreasures)
-            {
-                GameWin();
-            }
-
-            scoreText.text = collectedTreasures + "/" + totalTreasures;
+            GameWin();
         }
 
-        public void GameOver()
-        {
-            Debug.Log("Game Over");
-        }
+        scoreText.text = collectedTreasures + "/" + totalTreasures;
+    }
 
-        public void GameWin()
-        {
-            Debug.Log("You Win!");
-        }
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+
+        // workshop - show game over text
+    }
+
+    public void GameWin()
+    {
+        Debug.Log("You Win!");
+
+        // workshop - show game win text
     }
 }
+

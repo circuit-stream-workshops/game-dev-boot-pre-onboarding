@@ -2,35 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CircuitStream
+
+public class PlayerLogic : MonoBehaviour
 {
-    public class PlayerLogic : MonoBehaviour
+    private void OnTriggerEnter(Collider other)
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        //workshop
+        /*
+        if -> treasure, add score
+        if -> ghost, game over
 
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("treasure"))
-            {
-                //collect treasure
-                Destroy(other.gameObject);
-                GameManager.Instance.CollectTreasure();
-            }
-            else if (other.CompareTag("ghost"))
-            {
-                //game over
-                GameManager.Instance.GameOver();
-            }
-        }
+            */
     }
 }
